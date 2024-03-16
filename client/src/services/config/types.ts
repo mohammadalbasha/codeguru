@@ -1,0 +1,3 @@
+interface Domain {
+  url: string;
+}

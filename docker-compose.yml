@@ -1,0 +1,66 @@
+version: "3"
+
+services:
+  back-end:
+    build:
+      context: server
+    container_name: back-end
+    working_dir: /usr/src/app
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - MAIL_HOST=smtp.gmail.com
+      - MAIL_PORT=465
+      - MAIL_DEFAULT_FROM_USER=codeguru
+      - MAIL_IS_SECURE=false
+      - MAIL_AUTH_USER=mohammadalbacha2000@gmail.com
+      - MAIL_AUTH_PASSWORD=klshuwxibiqgdxko
+      - MAIL_SMTP=smtp.gmail.com
+      - DATABASE_USERNAME=user
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=Expenses
+      - DATABASE_ENVIRONMENT=mongo
+      - REDIS_URL=redis://redis:6379
+      - FRONTEND_DOMAIN=http://localhost:5173
+      - FRONTEND_RESET_PASSWORD_LINK=http://localhost:5173/resetPassword
+      - NODE_ENV='development'
+      - JWT_ACCESS_SECRET='123456'
+      - JWT_REFRESH_SECRET='123456'
+      - SECURITY_JWT_REFRESH_EXPIRESIN=1w
+      - SECURITY_JWT_ACCESS_EXPIRESIN=1d
+      - ENVIRONMENT='development'
+      - RUN_ENVIRONMENT=docker
+
+    depends_on:
+      - mongo
+
+  front-end:
+    build:
+      context: client
+    container_name: front-end
+    environment:
+      - VITE_SERVER_DOMAIN=http://localhost:4000
+      - PORT=5173
+      - VITE_SERVER_PORT=5173
+    expose:
+      - 5173
+    ports:
+      - "5173:5173"
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"

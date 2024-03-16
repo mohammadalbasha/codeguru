@@ -1,0 +1,4 @@
+export enum IOEvents {
+  TODAY_EXPENSES = "TODAY_EXPENSES",
+  PUBLIC_MESSAGE = "PUBLC_MESSAGE",
+}
