@@ -14,8 +14,8 @@ services:
       - MAIL_PORT=465
       - MAIL_DEFAULT_FROM_USER=codeguru
       - MAIL_IS_SECURE=false
-      - MAIL_AUTH_USER=mohammadalbacha2000@gmail.com
-      - MAIL_AUTH_PASSWORD=klshuwxibiqgdxko
+      - MAIL_AUTH_USER=
+      - MAIL_AUTH_PASSWORD=
       - MAIL_SMTP=smtp.gmail.com
       - DATABASE_USERNAME=user
       - DATABASE_PASSWORD=password
